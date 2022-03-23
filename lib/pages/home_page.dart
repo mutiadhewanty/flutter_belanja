@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_belanja/models/item.dart';
 
+import '../widgets/product.dart';
+import '../widgets/searching.dart';
+
 class HomePage extends StatelessWidget {
   final List<Item> items = [
-    Item(name: 'Sugar', price: 5000, image: 'assets/sugar.jpg'),
-    Item(name: 'Salt', price: 2000, image: 'assets/salt.jpeg'),
-    Item(name: 'Flour', price: 15000, image: 'assets/flour.jpeg'),
+    Item(name: 'Sugar', price: 15000, image: 'assets/sugar.jpg'),
+    Item(name: 'Salt', price: 10000, image: 'assets/salt.jpeg'),
+    Item(name: 'Flour', price: 25000, image: 'assets/flour.jpeg'),
   ];
   HomePage({Key? key}) : super(key: key);
 
@@ -45,21 +48,7 @@ class HomePage extends StatelessWidget {
                             color: Colors.black38),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                        top: 30,
-                      ),
-                      child: Center(
-                          child: TextField(
-                        decoration: InputDecoration(
-                            hintText: 'Search',
-                            prefixIcon: Icon(Icons.search),
-                            contentPadding: const EdgeInsets.all(15),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      )),
-                    ),
+                    Searching(),
                     Padding(
                       padding: EdgeInsets.only(left: 20, top: 30),
                       child: Text(
@@ -71,48 +60,7 @@ class HomePage extends StatelessWidget {
                             color: Colors.black87),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Container(
-                        width: 400,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          padding: EdgeInsets.all(8),
-                          itemCount: items.length,
-                          itemBuilder: (context, index) {
-                            final item = items[index];
-                            return InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/item',
-                                    arguments: item);
-                              },
-                              child: Card(
-                                child: Container(
-                                  margin: EdgeInsets.all(8),
-                                  child: Row(
-                                    children: [
-                                      Expanded(child: Image.asset(item.image)),
-                                      Expanded(
-                                          child: Column(
-                                        children: [
-                                          Text(item.name),
-                                          Padding(
-                                              padding: EdgeInsets.all(8),
-                                              child: Text(
-                                                item.price.toString(),
-                                                textAlign: TextAlign.end,
-                                              )),
-                                        ],
-                                      )),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    )
+                    Product(items: items)
                   ],
                 )),
                 Padding(
@@ -128,3 +76,6 @@ class HomePage extends StatelessWidget {
         ));
   }
 }
+
+
+

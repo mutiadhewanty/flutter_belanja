@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/item.dart';
+import '../widgets/basketButton.dart';
 
 class ItemPage extends StatelessWidget {
   const ItemPage({Key? key}) : super(key: key);
@@ -32,27 +33,11 @@ class ItemPage extends StatelessWidget {
                         textAlign: TextAlign.justify)),
               ],
             ),
-            Ink(
-              decoration: const ShapeDecoration(
-                color: Color.fromARGB(255, 47, 172, 67),
-                shape: CircleBorder(),
-              ),
-              child: IconButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context)
-                    ..removeCurrentSnackBar()
-                    ..showSnackBar(SnackBar(content: Text(args.name)));
-                },
-                icon: Icon(
-                  Icons.shopping_basket_outlined,
-                  color: Colors.white,
-                ),
-                iconSize: 20.0,
-              ),
-            ),
+            BasketButton(args: args),
           ],
         ),
       ),
     );
   }
 }
+
